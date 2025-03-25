@@ -15,7 +15,7 @@ config :users_backend, UsersBackend.EventStore,
   serializer: Commanded.Serialization.JsonSerializer,
   username: "postgres",
   password: "postgres",
-  database: "users_backend_dev",
+  database: "users_backend_eventstore_dev",
   hostname: "localhost",
   pool_size: 10
 
