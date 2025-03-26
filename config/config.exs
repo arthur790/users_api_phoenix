@@ -38,7 +38,7 @@ config :users_backend, UsersBackend.App,
   pubsub: :local,
   registry: :local
 
-#config :commanded_ecto_projections, repo: UsersBackend.Repo
+config :commanded_ecto_projections, repo: UsersBackend.Repo
 
 config :users_backend, event_stores: [UsersBackend.EventStore]
 
