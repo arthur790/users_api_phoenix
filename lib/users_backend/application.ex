@@ -17,7 +17,8 @@ defmodule UsersBackend.Application do
       # {UsersBackend.Worker, arg},
       # Start to serve requests, typically the last entry
       UsersBackendWeb.Endpoint,
-      UsersBackend.EventStore
+      UsersBackend.App,
+      UsersBackend.Users.Supervisor
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

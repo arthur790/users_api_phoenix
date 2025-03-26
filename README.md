@@ -20,3 +20,6 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
 ### Event store initialization
 mix do event_store.create, event_store.init
+
+## Use recompile
+recompile()

@@ -19,7 +19,7 @@ defmodule UsersBackend.Users.Projections.User do
     user
     |> cast(attrs, [:name, :email, :password])
     |> validate_required([:name, :email, :password])
-    |> unique_constraint(:email)
+    #|> unique_constraint(:email)
   end
 
 
@@ -28,7 +28,7 @@ defmodule UsersBackend.Users.Projections.User do
     user
     |> cast(attrs, [:name, :email, :password])
     |> validate_required([:name, :email, :password])
-    |> unique_constraint(:email)
+    #|> unique_constraint(:email)
   end
 
 
