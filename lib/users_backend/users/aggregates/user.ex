@@ -7,7 +7,9 @@ defmodule UsersBackend.Users.Aggregates.User do
     :email
   ]
 
+
   @behaviour Commanded.Aggregates.AggregateLifespan
+
 
 
 
@@ -36,5 +38,11 @@ defmodule UsersBackend.Users.Aggregates.User do
           email: created.email
     }
   end
+
+  def after_command(_command), do: :timer.minutes(1)
+
+  def after_event(_event), do: :timer.minutes(1)
+
+  def after_error(_error), do: :timer.minutes(1)
 
 end
