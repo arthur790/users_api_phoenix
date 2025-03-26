@@ -2,7 +2,7 @@ defmodule UsersBackendWeb.UserController do
   use UsersBackendWeb, :controller
 
   alias UsersBackend.Users
-  alias UsersBackend.Users.User
+  alias UsersBackend.Users.Projections.User
 
   action_fallback UsersBackendWeb.FallbackController
 

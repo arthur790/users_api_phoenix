@@ -1,5 +1,5 @@
 defmodule UsersBackendWeb.UserJSON do
-  alias UsersBackend.Users.User
+  alias UsersBackend.Users.Projections.User
 
   @doc """
   Renders a list of users.
@@ -17,7 +17,7 @@ defmodule UsersBackendWeb.UserJSON do
 
   defp data(%User{} = user) do
     %{
-      id: user.id,
+      id: user.uuid,
       name: user.name,
       email: user.email,
       password: user.password

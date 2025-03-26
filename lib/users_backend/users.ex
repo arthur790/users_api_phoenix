@@ -4,9 +4,11 @@ defmodule UsersBackend.Users do
   """
 
   import Ecto.Query, warn: false
+  alias UsersBackend.Users.Commands.CreateUser
+  alias UsersBackend.App
   alias UsersBackend.Repo
 
-  alias UsersBackend.Users.User
+  alias UsersBackend.Users.Projections.User
 
   @doc """
   Returns the list of users.
@@ -50,9 +52,17 @@ defmodule UsersBackend.Users do
 
   """
   def create_user(attrs \\ %{}) do
-    %User{}
-    |> User.changeset(attrs)
-    |> Repo.insert()
+    uuid = Ecto.UUID.generate()
+    command =
+      attrs
+      |> CreateUser.new()
+      |> CreateUser.assign_uuid(uuid)
+
+    with :ok <- App.dispatch(command, consistency: :strong) do
+      {:ok, get_user!(uuid)}
+    else
+      reply -> reply
+    end
   end
 
   @doc """
