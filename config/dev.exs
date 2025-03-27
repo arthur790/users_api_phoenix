@@ -58,7 +58,9 @@ config :users_backend, UsersBackendWeb.Endpoint,
 # If desired, both `http:` and `https:` keys can be
 # configured to run both http and https servers on
 # different ports.
-
+config :users_backend, UsersBackend.Guardian,
+  issuer: "users_backend",
+  secret_key: "yu8cQhBR13BLMc6XhMJJnAq5QWz+qf4a9dS7eaaWs6ZodetUAYmhW7bci1Z4TZta"
 # Enable dev routes for dashboard and mailbox
 config :users_backend, dev_routes: true
 

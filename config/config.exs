@@ -42,7 +42,7 @@ config :commanded_ecto_projections, repo: UsersBackend.Repo
 
 config :users_backend, event_stores: [UsersBackend.EventStore]
 
-config :users_backend, UsersBackend.App,
+config :users_backend, UsersBackend.Guardian,
   issuer: "users_backend",
   secret_key: "yu8cQhBR13BLMc6XhMJJnAq5QWz+qf4a9dS7eaaWs6ZodetUAYmhW7bci1Z4TZta"
 

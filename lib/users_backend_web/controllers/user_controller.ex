@@ -40,4 +40,10 @@ defmodule UsersBackendWeb.UserController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def sign_in(conn,  %{"email" => email, "password" => password})do
+    with {:ok, user, token} <- UsersBackend.Guardian.authenticate(email, password) do
+      render(conn, :show, user: user)
+    end
+  end
 end

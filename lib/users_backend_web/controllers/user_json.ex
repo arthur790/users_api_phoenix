@@ -14,6 +14,9 @@ defmodule UsersBackendWeb.UserJSON do
   def show(%{user: user}) do
     %{data: data(user)}
   end
+  def show(%{user: user,  token: token}) do
+    %{data: data(user, token)}
+  end
 
   defp data(%User{} = user) do
     %{
@@ -21,6 +24,14 @@ defmodule UsersBackendWeb.UserJSON do
       name: user.name,
       email: user.email,
       password: user.password
+    }
+  end
+
+  defp data(%User{} = user, %{token: token}) do
+    %{
+      id: user.uuid,
+      email: user.email,
+      token: token
     }
   end
 end

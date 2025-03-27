@@ -8,5 +8,6 @@ defmodule UsersBackendWeb.Router do
   scope "/api", UsersBackendWeb do
     pipe_through :api
     resources "/users", UserController
+    post "/users/sign_in", UserController, :sign_in
   end
 end

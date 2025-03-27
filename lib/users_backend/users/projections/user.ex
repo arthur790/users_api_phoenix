@@ -17,7 +17,7 @@ defmodule UsersBackend.Users.Projections.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :email, :password])
+    |> cast(attrs, [:uuid, :name, :email, :password])
     |> validate_required([:name, :email, :password])
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/@/)
