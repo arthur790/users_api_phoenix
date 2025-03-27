@@ -42,6 +42,10 @@ config :commanded_ecto_projections, repo: UsersBackend.Repo
 
 config :users_backend, event_stores: [UsersBackend.EventStore]
 
+config :users_backend, UsersBackend.App,
+  issuer: "users_backend",
+  secret_key: "yu8cQhBR13BLMc6XhMJJnAq5QWz+qf4a9dS7eaaWs6ZodetUAYmhW7bci1Z4TZta"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

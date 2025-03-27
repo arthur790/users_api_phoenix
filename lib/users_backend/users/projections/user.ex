@@ -19,7 +19,10 @@ defmodule UsersBackend.Users.Projections.User do
     user
     |> cast(attrs, [:name, :email, :password])
     |> validate_required([:name, :email, :password])
-    #|> unique_constraint(:email)
+    |> unique_constraint(:email)
+    |> validate_format(:email, ~r/@/)
+    |> validate_length(:password, min: 6)
+    |> put_password_hash()
   end
 
 
@@ -30,6 +33,15 @@ defmodule UsersBackend.Users.Projections.User do
     |> validate_required([:name, :email, :password])
     #|> unique_constraint(:email)
   end
+
+
+  defp put_password_hash(
+    %Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset
+  ) do
+    change(changeset, password: Bcrypt.hash_pwd_salt(password))
+  end
+
+  defp put_password_hash(changeset), do: changeset
 
 
 end
