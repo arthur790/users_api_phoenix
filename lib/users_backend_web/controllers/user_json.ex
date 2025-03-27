@@ -14,7 +14,7 @@ defmodule UsersBackendWeb.UserJSON do
   def show(%{user: user}) do
     %{data: data(user)}
   end
-  def show(%{user: user,  token: token}) do
+  def show_account(%{user: user,  token: token}) do
     %{data: data(user, token)}
   end
 
@@ -27,7 +27,7 @@ defmodule UsersBackendWeb.UserJSON do
     }
   end
 
-  defp data(%User{} = user, %{token: token}) do
+  defp data(%User{} = user, token) do
     %{
       id: user.uuid,
       email: user.email,
