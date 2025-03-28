@@ -5,7 +5,8 @@ defmodule UsersBackend.Users.Aggregates.User do
     :name,
     :password,
     :email,
-    :favorite_color
+    :favorite_color,
+    :jwt
   ]
 
 
@@ -16,9 +17,9 @@ defmodule UsersBackend.Users.Aggregates.User do
 
   alias UsersBackend.Users.Aggregates.User
 
-  alias UsersBackend.Users.Commands.{CreateUser, UpdateUser}
+  alias UsersBackend.Users.Commands.{CreateUser, UpdateUser, SignInUser}
 
-  alias UsersBackend.Users.Events.{UserCreated, FavoriteColorRegistered}
+  alias UsersBackend.Users.Events.{UserCreated, FavoriteColorRegistered, SignedIn}
 
   def execute(%User{uuid: nil}, %CreateUser{} = create) do
     %UserCreated{
@@ -38,6 +39,13 @@ defmodule UsersBackend.Users.Aggregates.User do
     }
   end
 
+  def execute(%User{} = user, %SignInUser{} = update) do
+    %SignedIn{
+      user_id: user.uuid,
+      jwt: update.jwt
+    }
+  end
+
 
   def apply(%User{} = user, %UserCreated{} = created) do
     %User{
@@ -52,6 +60,10 @@ defmodule UsersBackend.Users.Aggregates.User do
 
   def apply(%User{} = user, %FavoriteColorRegistered{favorite_color: favorite_color}) do
     %User{user | favorite_color: favorite_color}
+  end
+
+  def apply(%User{} = user, %SignedIn{jwt: jwt}) do
+    %User{user | jwt: jwt}
   end
 
   def after_command(_command), do: :timer.minutes(1)
