@@ -22,7 +22,8 @@ defmodule UsersBackendWeb.UserJSON do
     %{
       id: user.uuid,
       name: user.name,
-      email: user.email
+      email: user.email,
+      color: user.favorite_color
     }
   end
 
