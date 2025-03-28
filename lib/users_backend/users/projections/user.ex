@@ -10,6 +10,7 @@ defmodule UsersBackend.Users.Projections.User do
     field :name, :string
     field :password, :string
     field :email, :string
+    field :favorite_color, :string
 
     timestamps(type: :utc_datetime)
   end
