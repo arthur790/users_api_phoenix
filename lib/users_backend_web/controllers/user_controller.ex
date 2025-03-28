@@ -6,6 +6,7 @@ defmodule UsersBackendWeb.UserController do
 
   action_fallback UsersBackendWeb.FallbackController
 
+
   def index(conn, _params) do
     users = Users.list_users()
     render(conn, :index, users: users)
@@ -46,4 +47,21 @@ defmodule UsersBackendWeb.UserController do
       render(conn, :show_sign_in, %{user: user,  token: token})
     end
   end
+
+
+
+  def me(conn, _params) do
+    user = UsersBackend.Guardian.Plug.current_resource(conn)
+    conn |> put_status(200) |> json(%{email: user.email, id: user.uuid})
+  end
+
+  def register_favorite_color(conn, %{ "user" => user_params}) do
+    resource_user = UsersBackend.Guardian.Plug.current_resource(conn)
+    user = Users.get_user!(resource_user.uuid)
+
+    with {:ok, %User{} = user} <- Users.update_favorite_color(user, user_params) do
+      render(conn, :show, user: user)
+    end
+  end
+
 end

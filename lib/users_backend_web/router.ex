@@ -19,5 +19,8 @@ defmodule UsersBackendWeb.Router do
     pipe_through [:api, :auth]
     get "/users", UserController, :index
     get "/users/:id", UserController, :show
+    get "/info/me/", UserController, :me
+    put "/users/register_favorite_color", UserController, :register_favorite_color
+
   end
 end

@@ -6,8 +6,8 @@ defmodule UsersBackend.Users.Projectors.User do
     consistency: :strong
 
   alias UsersBackend.Users.Aggregates.User
-  #alias UsersBackend.Repo
-  alias UsersBackend.Users.Events.{UserCreated}
+  alias UsersBackend.Repo
+  alias UsersBackend.Users.Events.{UserCreated, FavoriteColorRegistered}
 
   alias UsersBackend.Users.Projections.User
 
@@ -23,5 +23,13 @@ defmodule UsersBackend.Users.Projectors.User do
     password_confirmation: created.confirm_password
 
     ))
+  end)
+
+
+  project(%FavoriteColorRegistered{uuid: uuid, favorite_color: favorite_color}, _, fn multi ->
+    case Repo.get(User, uuid) do
+      nil -> multi
+      user -> Ecto.Multi.update(multi, :user, User.update_changeset(user, %{favorite_color: favorite_color}))
+    end
   end)
 end

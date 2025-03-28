@@ -31,9 +31,7 @@ defmodule UsersBackend.Users.Projections.User do
 
   def update_changeset(user, attrs \\ %{}) do
     user
-    |> cast(attrs, [:name, :email, :password])
-    |> validate_required([:name, :email, :password])
-    #|> unique_constraint(:email)
+    |> cast(attrs, [:name, :email, :password, :favorite_color])
   end
 
 
