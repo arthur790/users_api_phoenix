@@ -24,7 +24,7 @@ defmodule UsersBackend.Users.Projections.User do
     |> put_password_hash()
   end
 
-  def validate_changeset( attrs) do
+  defp validate_changeset( attrs) do
     %User{}
     |> cast(attrs, [:uuid, :name, :email, :password, :password_confirmation])
     |> validate_required([:name, :email, :password])
@@ -36,6 +36,22 @@ defmodule UsersBackend.Users.Projections.User do
 
   def validate_params_register(params) do
     case validate_changeset(params) do
+      %Ecto.Changeset{valid?: false} = changeset ->
+        {:error, changeset}
+
+      %Ecto.Changeset{valid?: true, changes: changes} ->
+        {:ok, changes}
+    end
+  end
+
+  defp validate_color_changeset( attrs) do
+    %User{}
+    |> cast(attrs, [:favorite_color])
+    |> validate_required([:favorite_color])
+  end
+
+  def validate_params_register_favorite_color(params) do
+    case validate_color_changeset(params) do
       %Ecto.Changeset{valid?: false} = changeset ->
         {:error, changeset}
 

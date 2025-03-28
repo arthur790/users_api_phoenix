@@ -60,7 +60,8 @@ defmodule UsersBackendWeb.UserController do
     resource_user = UsersBackend.Guardian.Plug.current_resource(conn)
     user = Users.get_user!(resource_user.uuid)
 
-    with {:ok, %User{} = user} <- Users.update_favorite_color(user, user_params) do
+    with  {:ok, _attrs} <- User.validate_params_register_favorite_color(user_params),
+          {:ok, %User{} = user} <- Users.update_favorite_color(user, user_params) do
       render(conn, :show, user: user)
     end
   end
