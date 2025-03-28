@@ -12,9 +12,6 @@ defmodule UsersBackend.Users.Aggregates.User do
 
   @behaviour Commanded.Aggregates.AggregateLifespan
 
-
-
-
   alias UsersBackend.Users.Aggregates.User
 
   alias UsersBackend.Users.Commands.{CreateUser, UpdateUser, SignInUser, RegisterFavoriteColor }
@@ -27,7 +24,7 @@ defmodule UsersBackend.Users.Aggregates.User do
       name: create.name,
       password: create.password,
       email: create.email,
-      confirm_password: create.confirm_password
+      password_confirmation: create.password_confirmation
     }
   end
 

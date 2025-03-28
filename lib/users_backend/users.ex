@@ -4,7 +4,7 @@ defmodule UsersBackend.Users do
   """
 
   import Ecto.Query, warn: false
-  alias UsersBackend.Users.Commands.{CreateUser, UpdateUser, RegisterFavoriteColor}
+  alias UsersBackend.Users.Commands.{CreateUser, RegisterFavoriteColor}
   alias UsersBackend.App
   alias UsersBackend.Repo
 

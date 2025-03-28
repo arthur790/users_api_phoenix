@@ -4,7 +4,7 @@ defmodule UsersBackend.Users.Commands.CreateUser do
     :name,
     :password,
     :email,
-    :confirm_password
+    :password_confirmation
   ]
 
   use ExConstructor
