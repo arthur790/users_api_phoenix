@@ -24,7 +24,8 @@ defmodule UsersBackend.Users.Aggregates.User do
       uuid: create.uuid,
       name: create.name,
       password: create.password,
-      email: create.email
+      email: create.email,
+      confirm_password: create.confirm_password
     }
   end
 

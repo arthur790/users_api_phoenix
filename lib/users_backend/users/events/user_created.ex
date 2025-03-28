@@ -4,6 +4,7 @@ defmodule UsersBackend.Users.Events.UserCreated do
     :uuid,
     :name,
     :password,
-    :email
+    :email,
+    :confirm_password
   ]
 end

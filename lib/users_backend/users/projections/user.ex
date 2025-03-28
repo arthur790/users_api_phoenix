@@ -16,13 +16,14 @@ defmodule UsersBackend.Users.Projections.User do
   end
 
   @doc false
-  def changeset(user, attrs) do
+  def changeset(user, attrs, password_confirmation) do
     user
     |> cast(attrs, [:uuid, :name, :email, :password])
     |> validate_required([:name, :email, :password])
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/@/)
     |> validate_length(:password, min: 6)
+    |> validate_confirmation(:password)
     |> put_password_hash()
   end
 
@@ -43,6 +44,9 @@ defmodule UsersBackend.Users.Projections.User do
   end
 
   defp put_password_hash(changeset), do: changeset
+
+
+
 
 
 end
