@@ -5,9 +5,19 @@ defmodule UsersBackendWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug UsersBackend.GuardianPipeline
+  end
+
   scope "/api", UsersBackendWeb do
     pipe_through :api
-    resources "/users", UserController
+    post "/users", UserController, :create
     post "/users/sign_in", UserController, :sign_in
+  end
+
+  scope "/api", UsersBackendWeb do
+    pipe_through [:api, :auth]
+    get "/users", UserController, :index
+    get "/users/:id", UserController, :show
   end
 end

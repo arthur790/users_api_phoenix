@@ -23,3 +23,6 @@ mix do event_store.create, event_store.init
 
 ## Use recompile
 recompile()
+
+## ver rutas
+mix phx.routes
