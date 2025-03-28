@@ -17,7 +17,7 @@ defmodule UsersBackend.Users.Aggregates.User do
 
   alias UsersBackend.Users.Aggregates.User
 
-  alias UsersBackend.Users.Commands.{CreateUser, UpdateUser, SignInUser}
+  alias UsersBackend.Users.Commands.{CreateUser, UpdateUser, SignInUser, RegisterFavoriteColor }
 
   alias UsersBackend.Users.Events.{UserCreated, FavoriteColorRegistered, SignedIn}
 
@@ -33,11 +33,20 @@ defmodule UsersBackend.Users.Aggregates.User do
 
 
   def execute(%User{} = user, %UpdateUser{} = update) do
+    # este podría servir para manejar el update de cualquier dato de usuario, tendría que englobar cada evento de User
     %FavoriteColorRegistered{
       uuid: user.uuid,
       favorite_color: update.favorite_color
     }
   end
+
+  def execute(%User{} = user, %RegisterFavoriteColor{} = update) do
+    %FavoriteColorRegistered{
+      uuid: user.uuid,
+      favorite_color: update.favorite_color
+    }
+  end
+
 
   def execute(%User{} = user, %SignInUser{} = update) do
     %SignedIn{

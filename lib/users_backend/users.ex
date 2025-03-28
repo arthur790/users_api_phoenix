@@ -4,7 +4,7 @@ defmodule UsersBackend.Users do
   """
 
   import Ecto.Query, warn: false
-  alias UsersBackend.Users.Commands.{CreateUser, UpdateUser}
+  alias UsersBackend.Users.Commands.{CreateUser, UpdateUser, RegisterFavoriteColor}
   alias UsersBackend.App
   alias UsersBackend.Repo
 
@@ -84,11 +84,10 @@ defmodule UsersBackend.Users do
   end
 
   def update_favorite_color(%User{uuid: uuid}, attrs) do
-    # TODO: ensure todo is active
     command =
       attrs
-      |> UpdateUser.new()
-      |> UpdateUser.assign_uuid(uuid)
+      |> RegisterFavoriteColor.new()
+      |> RegisterFavoriteColor.assign_uuid(uuid)
 
     with :ok <- App.dispatch(command, consistency: :strong) do
       {:ok, get_user!(uuid)}
