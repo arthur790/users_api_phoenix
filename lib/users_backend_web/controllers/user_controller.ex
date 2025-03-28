@@ -13,7 +13,8 @@ defmodule UsersBackendWeb.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    with {:ok, %User{} = user} <- Users.create_user(user_params) do
+    with  {:ok, attrs} <- User.validate_params_register(user_params),
+          {:ok, %User{} = user} <- Users.create_user(attrs) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", ~p"/api/users/#{user}")

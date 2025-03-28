@@ -6,6 +6,7 @@ defmodule UsersBackendWeb.FallbackController do
   """
   use UsersBackendWeb, :controller
 
+
   # This clause handles errors returned by Ecto's insert/update/delete.
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     conn
@@ -28,4 +29,7 @@ defmodule UsersBackendWeb.FallbackController do
     |> put_view(html: UsersApiWeb.ErrorHTML, json: UsersApiWeb.ErrorJSON)
     |> render(:"403")
   end
+
+
+
 end
