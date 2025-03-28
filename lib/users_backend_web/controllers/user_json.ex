@@ -30,7 +30,6 @@ defmodule UsersBackendWeb.UserJSON do
   defp data(%User{} = user, token) do
     %{
       id: user.uuid,
-      email: user.email,
       token: token
     }
   end

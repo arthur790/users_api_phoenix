@@ -9,6 +9,7 @@ defmodule UsersBackend.Users.Projections.User do
   schema "users" do
     field :name, :string
     field :password, :string
+    field :password_confirmation, :string, virtual: true
     field :email, :string
     field :favorite_color, :string
 
@@ -16,9 +17,9 @@ defmodule UsersBackend.Users.Projections.User do
   end
 
   @doc false
-  def changeset(user, attrs, password_confirmation) do
+  def changeset(user, attrs) do
     user
-    |> cast(attrs, [:uuid, :name, :email, :password])
+    |> cast(attrs, [:uuid, :name, :email, :password, :password_confirmation])
     |> validate_required([:name, :email, :password])
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/@/)

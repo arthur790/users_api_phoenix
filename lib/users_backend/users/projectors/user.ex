@@ -17,10 +17,10 @@ defmodule UsersBackend.Users.Projectors.User do
       uuid: created.uuid,
       name: created.name,
       password: created.password,
-      email: created.email
+      email: created.email,
+      password_confirmation: created.confirm_password
 
-    },
-    password_confirmation: created.confirm_password
+    }
 
     ))
   end)
