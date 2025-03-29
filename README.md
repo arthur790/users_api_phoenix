@@ -1,3 +1,10 @@
+# Required libraries
+
+- Phoenix framework: Required to build API
+- Ecto: Required for postgres database
+- Commanded: Required to implement CQRS / ES (Configured to use EventStore postgres event store database)
+- Guardian: Required to handle JWT for authentication
+
 # UsersBackend
 
 To start your Phoenix server:
@@ -9,20 +16,9 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
-## Learn more
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
-## comands
-
-### Event store initialization
-mix do event_store.create, event_store.init
-
-## Use recompile
-recompile()
-
-## ver rutas
+## see routes
 mix phx.routes
+
+## Documentation
+about de api, the documentation is in postman, link: https://documenter.getpostman.com/view/27525327/2sB2cPj5aP

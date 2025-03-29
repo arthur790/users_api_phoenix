@@ -13,7 +13,7 @@ defmodule UsersBackend.Users.Projectors.User do
 
 
   project(%UserCreated{} = created, _, fn multi ->
-    Ecto.Multi.insert(multi, :todo, User.changeset(%User{}, %{
+    Ecto.Multi.insert(multi, :user, User.changeset(%User{}, %{
       uuid: created.uuid,
       name: created.name,
       password: created.password,
