@@ -60,7 +60,7 @@ defmodule UsersBackendWeb.UserController do
 
   def me(conn, _params) do
     user = UsersBackend.Guardian.Plug.current_resource(conn)
-    conn |> put_status(200) |> json(%{email: user.email, id: user.uuid})
+    conn |> put_status(200) |> json(%{email: user.email, id: user.uuid, name: user.name})
   end
 
   def register_favorite_color(conn, %{ "user" => user_params}) do
