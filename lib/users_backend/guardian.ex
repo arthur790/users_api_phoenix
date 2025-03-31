@@ -30,7 +30,7 @@ defmodule UsersBackend.Guardian do
     {:error, :reason_for_error}
   end
 
-  def authenticate(email, password) do
+  def authenticate( email, password) do
     case UsersBackend.Users.get_user_by_email(email) do
       nil ->
         {:error, :unauthorized}

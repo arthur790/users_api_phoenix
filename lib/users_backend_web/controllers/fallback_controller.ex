@@ -7,6 +7,21 @@ defmodule UsersBackendWeb.FallbackController do
   use UsersBackendWeb, :controller
 
 
+  def call(conn, {:error, :unauthorized}) do
+    conn
+    |> put_status(:unauthorized)
+    |> put_view( json: UsersBackendWeb.ErrorJSON)
+    |> render(:"403")
+  end
+
+   # This clause is an example of how to handle resources that cannot be found.
+   def call(conn, {:error, :not_found}) do
+    conn
+    |> put_status(:not_found)
+    |> put_view( json: UsersBackendWeb.ErrorJSON)
+    |> render(:"404")
+  end
+
   # This clause handles errors returned by Ecto's insert/update/delete.
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     conn
@@ -14,22 +29,5 @@ defmodule UsersBackendWeb.FallbackController do
     |> put_view(json: UsersBackendWeb.ChangesetJSON)
     |> render(:error, changeset: changeset)
   end
-
-  # This clause is an example of how to handle resources that cannot be found.
-  def call(conn, {:error, :not_found}) do
-    conn
-    |> put_status(:not_found)
-    |> put_view(html: UsersBackendWeb.ErrorHTML, json: UsersBackendWeb.ErrorJSON)
-    |> render(:"404")
-  end
-
-  def call(conn, {:error, :unauthorized}) do
-    conn
-    |> put_status(403)
-    |> put_view(html: UsersApiWeb.ErrorHTML, json: UsersApiWeb.ErrorJSON)
-    |> render(:"403")
-  end
-
-
 
 end

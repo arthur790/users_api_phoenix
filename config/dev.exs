@@ -64,6 +64,7 @@ config :users_backend, UsersBackend.Guardian,
 # Enable dev routes for dashboard and mailbox
 config :users_backend, dev_routes: true
 
+
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 

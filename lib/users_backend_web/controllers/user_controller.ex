@@ -44,9 +44,16 @@ defmodule UsersBackendWeb.UserController do
   end
 
   def sign_in(conn,  %{"email" => email, "password" => password})do
-    with {:ok, user, token} <- UsersBackend.Guardian.authenticate(email, password) do
-      render(conn, :show_sign_in, %{user: user,  token: token})
+    case  UsersBackend.Guardian.authenticate( email, password) do
+      {:ok, user, token} -> render(conn, :show_sign_in, %{user: user,  token: token})
+
+      {:error, _reason} ->
+        conn
+        |> put_status(:unauthorized)
+        |> put_view( json: UsersBackendWeb.ErrorJSON)
+        |> render(:"403", error: "invalid credentials")
     end
+
   end
 
 

@@ -126,6 +126,6 @@ defmodule UsersBackend.Users do
   end
 
   def get_user_by_email(email) do
-    Repo.get_by!(User, email: email)
+    Repo.get_by(User, email: email)
   end
 end
